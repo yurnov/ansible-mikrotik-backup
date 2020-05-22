@@ -1,2 +1,8 @@
 ---
-# tasks file for mikrotik-backup
+
+- name: Backup of Mikrotik to local storage
+  shell: ssh {{ username }}@{{inventory_hostname}} -T -p {{ ssh_port }} "{{ item }}={{ inventory_hostname }}" 
+  delegate_to: localhost
+  with_items:
+    - "/system backup save name"
+    - "/export compact file"

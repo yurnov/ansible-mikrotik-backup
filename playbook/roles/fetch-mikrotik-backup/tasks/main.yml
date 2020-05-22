@@ -1,0 +1,4 @@
+---
+- name: Backup of Mikrotik to local storage
+  shell: "scp -P {{ ssh_port}} {{ username }}@{{ inventory_hostname }}:{{ inventory_hostname }}.{{ fileext }} ~/{{ inventory_hostname }}.{{ fileext }}"
+  delegate_to: localhost

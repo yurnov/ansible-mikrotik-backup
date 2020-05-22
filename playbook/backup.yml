@@ -1,0 +1,7 @@
+---
+- name: Take backup of Mikrotik router(s)
+  gather_facts: true
+  hosts: mikrotik
+  roles:
+    - mikrotik-backup
+    - fetch-mikrotik-backup
