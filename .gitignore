@@ -1,0 +1,4 @@
+inventory
+*.retry
+output/*
+!output/PLACEHOLDER

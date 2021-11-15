@@ -1,0 +1,18 @@
+---
+- hosts: mikrotik
+  gather_facts: no
+  tasks:
+
+    - name: gather export
+      # shell with delegate_to: localhost works better that ansible.builtin.raw  
+      ansible.builtin.shell: >-
+        ssh {{ ansible_user }}@{{ inventory_hostname }} /export
+      register: export
+      delegate_to: localhost
+
+    - name: store export to local file
+      ansible.builtin.copy:
+        content: "{{ export.stdout }}"
+        dest: "output/{{ inventory_hostname }}.config"
+      when: export is defined
+      delegate_to: localhost
