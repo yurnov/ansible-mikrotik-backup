@@ -1,2 +1,2 @@
 [mikrotik]
-192.168.1.1 ansible_user=admin ansible_ssh_pass=password
+192.168.1.1 ansible_user=admin ansible_ssh_pass='password'

@@ -20,11 +20,12 @@ Simply clone this repo for usage
 git clone git@github.com:yurnov/ansible-mikrotik-backup.git
 ```
 
+You need to have passwordless authentication to your routeros devices or locally installed [sshpass](https://www.cyberciti.biz/faq/noninteractive-shell-script-ssh-password-provider/) for password authentication.
 ## Usage
 
 Copy `inventory.example` into `inventory` and than edit `inventory` to have your actual data. Multiple RouterOS device is supported, please add a separate line for each of them.
 
-In this stage ssh password-less authentication requried.
+Passwords should be placed into inventory file in case if you use password authentication.
 
 Run playbook with 
 
@@ -34,9 +35,10 @@ ansible-playbook main.yml -i inventory
 
 Gererated config files will be stored in `output` folder
 
-## TODO
+## Limitations
 
-Implement support of both, password authentication and password-less authentication with `sshpass` (need to be installed locally).
+Administrator account and passwords is not included to backup file due to security reason. Please take care of this part of config separately.
+## TODO
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
