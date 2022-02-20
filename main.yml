@@ -3,7 +3,7 @@
   gather_facts: no
   tasks:
 
-    - name: Run upgrade with password (when password is defined)
+    - name: Run backup with password (when password is defined)
       when: ansible_ssh_pass is defined
       block:
 
@@ -20,7 +20,7 @@
             You can found details in https://www.redhat.com/sysadmin/ssh-automation-sshpass
         when: sshpass.stdout|length == 0
 
-      - name: gather export
+      - name: gather export (with password authentication)
         # shell with delegate_to: localhost works better that ansible.builtin.raw  
         ansible.builtin.shell: >-
           sshpass -p '{{ ansible_ssh_pass }}' ssh -o StrictHostKeyChecking=no {{ ansible_user }}@{{ inventory_hostname }} /export
@@ -34,11 +34,11 @@
         when: export is defined
         delegate_to: localhost
 
-    - name: Run upgrade withot password (when password is not defined)
+    - name: Run backup withot password (when password is not defined)
       when: ansible_ssh_pass is not defined
       block:
 
-      - name: gather export
+      - name: gather export (with passwordless authentication)
         # shell with delegate_to: localhost works better that ansible.builtin.raw  
         ansible.builtin.shell: >-
           ssh {{ ansible_user }}@{{ inventory_hostname }} /export
