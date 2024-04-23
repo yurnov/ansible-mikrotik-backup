@@ -23,7 +23,7 @@
       - name: gather export (with password authentication)
         # shell with delegate_to: localhost works better that ansible.builtin.raw  
         ansible.builtin.shell: >-
-          sshpass -p '{{ ansible_ssh_pass }}' ssh -o StrictHostKeyChecking=no {{ ansible_user }}@{{ inventory_hostname }} /export
+          sshpass -p '{{ ansible_ssh_pass }}' ssh -o StrictHostKeyChecking=no {{ ansible_user }}@{{ inventory_hostname }} -p {{ ansible_port }} /export
         register: export
         delegate_to: localhost
 
@@ -41,7 +41,7 @@
       - name: gather export (with passwordless authentication)
         # shell with delegate_to: localhost works better that ansible.builtin.raw  
         ansible.builtin.shell: >-
-          ssh {{ ansible_user }}@{{ inventory_hostname }} /export
+          ssh {{ ansible_user }}@{{ inventory_hostname }} -p {{ ansible_port }} /export
         register: export
         delegate_to: localhost
 
