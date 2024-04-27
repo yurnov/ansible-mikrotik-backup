@@ -3,6 +3,10 @@
   gather_facts: no
   tasks:
 
+    - name: Set ssh port (set defualt 22 port when port is not defined)
+      set_fact:
+        ansible_port: "{{ ansible_port | default(22) }}"
+
     - name: Run backup with password (when password is defined)
       when: ansible_ssh_pass is defined
       block:
